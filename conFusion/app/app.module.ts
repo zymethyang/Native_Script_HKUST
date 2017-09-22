@@ -36,7 +36,8 @@ import { baseURL } from './shared/baseurl';
         NativeScriptHttpModule,
         NativeScriptUISideDrawerModule,
         TNSFontIconModule.forRoot({
-            'fa': './fonts/font-awesome.min.css'})
+            'fa': './fonts/font-awesome.min.css'
+        })
     ],
     declarations: [
         AppComponent,
@@ -48,7 +49,7 @@ import { baseURL } from './shared/baseurl';
         AboutComponent
     ],
     providers: [
-        {provide: 'BaseURL', useValue: baseURL},
+        { provide: 'BaseURL', useValue: baseURL },
         DishService,
         ProcessHTTPMsgService,
         PromotionService,
