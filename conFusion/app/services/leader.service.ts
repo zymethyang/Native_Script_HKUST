@@ -17,24 +17,23 @@ import 'rxjs/add/operator/catch';
 export class LeaderService {
 
   constructor(public http: Http,
-              private processHTTPMsgService: ProcessHTTPMsgService) { }
-
-  getPromotions(): Observable<Leader[]> {
-    return this.http.get(baseURL + 'leaders')
-                    .map(res => { return this.processHTTPMsgService.extractData(res); })
-                    .catch(error => { return this.processHTTPMsgService.handleError(error); });
-  }
+    private processHTTPMsgService: ProcessHTTPMsgService) { }
 
   getLeader(id: number): Observable<Leader> {
-    return  this.http.get(baseURL + 'leaders/'+ id)
-                    .map(res => { return this.processHTTPMsgService.extractData(res); })
-                    .catch(error => { return this.processHTTPMsgService.handleError(error); });
+    return this.http.get(baseURL + 'leaders/' + id)
+      .map(res => { return this.processHTTPMsgService.extractData(res); })
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
 
   getFeaturedLeader(): Observable<Leader> {
     return this.http.get(baseURL + 'leaders?featured=true')
-                    .map(res => { return this.processHTTPMsgService.extractData(res)[0]; })
-                    .catch(error => { return this.processHTTPMsgService.handleError(error); });
+      .map(res => { return this.processHTTPMsgService.extractData(res)[0]; })
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }
-
+  
+  getLeaders(): Observable<Leader[]> {
+    return this.http.get(baseURL + 'leaders')
+      .map(res => { return this.processHTTPMsgService.extractData(res); })
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
+  }
 }
