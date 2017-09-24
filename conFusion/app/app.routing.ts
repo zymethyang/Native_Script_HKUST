@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "/menu", pathMatch: "full" },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: "contactus", component: ContactComponent },
     { path: "about", component: AboutComponent },
     { path: "favorites", component: FavoritesComponent },
+    { path: "reservation", component: ReservationComponent },
     { path: 'dishdetail/:id',     component: DishdetailComponent },
 ];
 
