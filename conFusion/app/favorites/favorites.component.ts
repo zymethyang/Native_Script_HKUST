@@ -5,6 +5,8 @@ import { ListViewEventData, RadListView } from 'nativescript-telerik-ui/listview
 import { RadListViewComponent } from 'nativescript-telerik-ui/listview/angular';
 import { ObservableArray } from 'tns-core-modules/data/observable-array';
 import { DrawerPage } from '../shared/drawer/drawer.page';
+import { confirm } from "ui/dialogs";
+import { Toasty } from 'nativescript-toasty';
 @Component({
     selector: 'app-favorites',
     moduleId: module.id,
@@ -21,19 +23,44 @@ export class FavoritesComponent extends DrawerPage implements OnInit {
     constructor(private favoriteservice: FavoriteService,
         private changeDetectorRef: ChangeDetectorRef,
         @Inject('BaseURL') private BaseURL) {
-            super(changeDetectorRef);
+        super(changeDetectorRef);
     }
 
     ngOnInit() {
         this.favoriteservice.getFavorites()
             .subscribe(favorites => this.favorites = new ObservableArray(favorites),
-                errmess => this.errMess = errmess);
+            errmess => this.errMess = errmess);
     }
 
     deleteFavorite(id: number) {
-        this.favoriteservice.deleteFavorite(id)
-            .subscribe(favorites => this.favorites = new ObservableArray(favorites),
-                errmess => this.errMess = errmess);
+        console.log('delete', id);
+
+        let options = {
+            title: "Confirm Delete",
+            message: 'Do you want to delete Dish ' + id,
+            okButtonText: "Yes",
+            cancelButtonText: "No",
+            neutralButtonText: "Cancel"
+        };
+
+        confirm(options).then((result: boolean) => {
+            if (result) {
+
+                this.favorites = null;
+
+                this.favoriteservice.deleteFavorite(id)
+                    .subscribe(favorites => {
+                        const toast = new Toasty("Deleted Dish " + id, "short", "bottom");
+                        toast.show();
+                        this.favorites = new ObservableArray(favorites);
+                    },
+                    errmess => this.errMess = errmess);
+            }
+            else {
+                console.log('Delete cancelled');
+            }
+        });
+
     }
 
     public onCellSwiping(args: ListViewEventData) {
@@ -41,31 +68,23 @@ export class FavoritesComponent extends DrawerPage implements OnInit {
         var currentItemView = args.object;
         var currentView;
 
-        if(args.data.x > 200) {
+        if (args.data.x > 200) {
 
         }
         else if (args.data.x < -200) {
 
         }
     }
-    /*
-    public onSwipeCellStarted(args: ListViewEventData) {
-        var swipeLimits = args.data.swipeLimits;
-        var swipeView = args['object'];
-        var leftItem = swipeView.getViewById('mark-view');
-        var rightItem = swipeView.getViewById('delete-view');
-        swipeLimits.left = swipeLimits.right = args.data.x > 0 ? swipeView.getMeasuredWidth() / 2 : swipeView.getMeasuredWidth() / 2;
-        swipeLimits.threshold = swipeView.getMeasuredWidth();
-    }*/
+
     public onSwipeCellStarted(args: ListViewEventData) {
         var swipeLimits = args.data.swipeLimits;
         var swipeView = args['object'];
 
         var leftItem = swipeView.getViewById('mark-view');
         var rightItem = swipeView.getViewById('delete-view');
-        swipeLimits.left = swipeView.getMeasuredWidth()/5;
-        swipeLimits.right = swipeView.getMeasuredWidth()/5;
-        swipeLimits.threshold = swipeView.getMeasuredWidth()/5;
+        swipeLimits.left = swipeView.getMeasuredWidth() / 5;
+        swipeLimits.right = swipeView.getMeasuredWidth() / 5;
+        swipeLimits.threshold = swipeView.getMeasuredWidth() / 5;
     }
     public onSwipeCellFinished(args: ListViewEventData) {
 
