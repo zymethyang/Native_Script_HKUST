@@ -1,0 +1,13 @@
+<ScrollView orientation="vertical" tkMainContent class="page">
+    <GridLayout class="m-5" rows="auto auto auto auto" columns="*, *" [formGroup]="commentForm">
+        <Label class="h3" row="0" col="0" text="Your Name" textWrap="true"></Label>
+        <TextField class="input input-border" id="textName" hint="Your Name" [text]='' (textChange)="onNameChecked($event)" row="0"
+            col="1" formControlName="name"></TextField>
+        <Label class="h3" row="1" col="0" text="Rating" textWrap="true"></Label>
+        <Slider row="1" col="1" value="5" minValue="1" maxValue="5" formControlName="rating" formControlName="rating"></Slider>
+        <Label class="h3" row="2" col="0" text="Your Comment" textWrap="true"></Label>
+        <TextField class="input input-border" id="textComment" hint="Your Comment" [text]='' (textChange)="onCommentChecked($event)"
+            row="2" col="1" formControlName="comment"></TextField>
+        <Button class="btn btn-primary btn-active" row="3" col="0" text="Submit" (tap)="onSubmit()"></Button>
+    </GridLayout>
+</ScrollView>

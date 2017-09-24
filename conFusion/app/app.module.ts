@@ -17,6 +17,7 @@ import { AboutComponent } from './about/about.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationModalComponent } from "./reservationmodal/reservationmodal.component";
+import { CommentComponent } from "./comment/comment.component";
 
 import { MenuComponent } from './menu/menu.component';
 import { DishService } from './services/dish.service';
@@ -50,7 +51,8 @@ import { baseURL } from './shared/baseurl';
             'fa': './fonts/font-awesome.min.css'
         })
     ],
-    entryComponents: [ReservationModalComponent],
+    entryComponents: [ReservationModalComponent,
+        CommentComponent],
     declarations: [
         AppComponent,
         MenuComponent,
@@ -61,9 +63,10 @@ import { baseURL } from './shared/baseurl';
         AboutComponent,
         FavoritesComponent,
         ReservationComponent,
-        ReservationModalComponent
+        ReservationModalComponent,
+        CommentComponent
     ],
-    
+
     providers: [
         { provide: 'BaseURL', useValue: baseURL },
         DishService,
