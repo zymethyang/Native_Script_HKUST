@@ -73,7 +73,6 @@ export class DishdetailComponent implements OnInit {
         this.addToFavorites();
       } else if (result == "Add Comment") {
         this.showModal();
-        console.log(this.result);
       }
     });
   }
