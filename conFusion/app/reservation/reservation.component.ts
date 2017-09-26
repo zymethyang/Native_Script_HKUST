@@ -3,7 +3,7 @@ import { DrawerPage } from '../shared/drawer/drawer.page';
 import { TextField } from 'ui/text-field';
 import { Switch } from 'ui/switch';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
+import { ModalDialogService, ModalDialogOptions} from "nativescript-angular/modal-dialog";
 import { ReservationModalComponent } from "../reservationmodal/reservationmodal.component";
 
 @Component({

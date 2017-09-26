@@ -31,7 +31,6 @@ export class DishdetailComponent implements OnInit {
   avgstars: string;
   numcomments: number;
   favorite: boolean = false;
-  result: any;
   showComments: boolean = false;
 
   cardImage: View;
@@ -91,18 +90,18 @@ export class DishdetailComponent implements OnInit {
 
 
   showModal() {
-    this.createModelView().then(result => this.result = result);
-  }
 
-  private createModelView(): Promise<any> {
-    const today = new Date();
     const options: ModalDialogOptions = {
       viewContainerRef: this.vcRef,
-      context: today.toDateString(),
       fullscreen: false,
     };
-    return this.modalService.showModal(CommentComponent, options);
+
+    this.modalService.showModal(CommentComponent, options).then((result: Comment) => {
+      this.dish.comments.push(result);
+      console.log(this.dish.comments);
+    }).catch(() => { console.log('Error loading') });
   }
+
 
   onSwipe(args: SwipeGestureEventData) {
 
