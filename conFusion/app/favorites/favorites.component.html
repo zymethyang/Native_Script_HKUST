@@ -1,5 +1,5 @@
 <ActionBar title="My Favorites" class="action-bar">
-    <Image row="0" col="0" src="res://rcflogo" class="sidedrawer-header-image"></Image>
+    <NavigationButton text="Menu" icon="res://ic_drawer" (tap)="openDrawer()"></NavigationButton>
 </ActionBar>
 <RadSideDrawer #drawerComponent tkToggleNavButton showOverNavigation="true">
     <ScrollView tkDrawerContent class="sidedrawer-left">
