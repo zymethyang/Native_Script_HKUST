@@ -7,6 +7,7 @@ import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 import { NativeScriptUIListViewModule } from "nativescript-telerik-ui/listview/angular";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
+import { PlatformService } from './services/platform.service';
 
 import { AppComponent } from "./app.component";
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -76,7 +77,8 @@ import { baseURL } from './shared/baseurl';
         PromotionService,
         LeaderService,
         FavoriteService,
-        CouchbaseService
+        CouchbaseService,
+        PlatformService,
     ],
     schemas: [
         NO_ERRORS_SCHEMA
