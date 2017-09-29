@@ -98,14 +98,15 @@ export class DishdetailComponent implements OnInit {
   showModal() {
 
     const options: ModalDialogOptions = {
+      context:{},
       viewContainerRef: this.vcRef,
       fullscreen: false,
     };
 
-    this.modalService.showModal(CommentComponent, options).then((result: Comment) => {
-      this.dish.comments.push(result);
-      console.log(this.dish.comments);
-    }).catch(() => { console.log('Error loading') });
+    this.modalService.showModal(CommentComponent, options).then(result => {
+      
+  
+    });
   }
 
 

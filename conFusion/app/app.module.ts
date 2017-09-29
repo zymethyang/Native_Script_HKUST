@@ -8,6 +8,7 @@ import { NativeScriptUIListViewModule } from "nativescript-telerik-ui/listview/a
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlatformService } from './services/platform.service';
+import { Image } from 'ui/image';
 
 import { AppComponent } from "./app.component";
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -79,6 +80,7 @@ import { baseURL } from './shared/baseurl';
         FavoriteService,
         CouchbaseService,
         PlatformService,
+        Image
     ],
     schemas: [
         NO_ERRORS_SCHEMA

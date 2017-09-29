@@ -5,6 +5,7 @@ import { getString, setString } from 'application-settings';
 import { RouterExtensions } from 'nativescript-angular/router';
 import * as camera from 'nativescript-camera';
 import { Image } from 'ui/image';
+import * as imagepicker from "nativescript-imagepicker";
 
 @Component({
     moduleId: module.id,
@@ -18,7 +19,8 @@ export class UserAuthComponent implements OnInit {
 
     constructor(private page: Page,
         private routerExtensions: RouterExtensions,
-        private formBuilder: FormBuilder) {
+        private formBuilder: FormBuilder,
+        private image: Image) {
 
         this.loginForm = this.formBuilder.group({
             userName: [getString('userName', ''), Validators.required],
@@ -31,29 +33,48 @@ export class UserAuthComponent implements OnInit {
             userName: ['', Validators.required],
             password: ['', Validators.required],
             telnum: ['', Validators.required],
-            email: ['', Validators.required]                
+            email: ['', Validators.required]
         });
-
+        
     }
 
     ngOnInit() {
-
+        this.image = <Image>this.page.getViewById<Image>('myPicture');
     }
 
     takePicture() {
         let isAvailable = camera.isAvailable();
         if (isAvailable) {
             camera.requestPermissions();
-            var options = { width: 100, height: 100, keepAspectRatio: false, saveToGallery: true};
-
+            var options = { width: 100, height: 100, keepAspectRatio: false, saveToGallery: true };
             camera.takePicture(options)
                 .then((imageAsset) => {
-                    let image = <Image>this.page.getViewById<Image>('myPicture');
-                    image.src = imageAsset;
+                    this.image = <Image>this.page.getViewById<Image>('myPicture');
+                    this.image.src = imageAsset;
                 })
                 .catch((err) => console.log('Error -> ' + err.message));
         }
 
+    }
+    getFromLibrary() {
+        var context = imagepicker.create({
+            mode: "single"
+        });
+
+        context
+            .authorize()
+            .then(function () {
+                return context.present();
+            })
+            .then(function (selection) {
+                console.log("Selection done:");
+                selection.forEach(function (selected) {
+                    console.log(" - " + selected.uri);
+                    this.image.src = selected.uri;
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
     }
 
     register() {
@@ -77,9 +98,10 @@ export class UserAuthComponent implements OnInit {
 
         this.loginForm.patchValue({
             'userName': this.registerForm.get('userName').value,
-            'password': this.registerForm.get('password').value});
+            'password': this.registerForm.get('password').value
+        });
 
-            this.tabSelectedIndex = 0;
+        this.tabSelectedIndex = 0;
     }
 
 }

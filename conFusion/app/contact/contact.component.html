@@ -25,7 +25,7 @@
                 </StackLayout>
             </GridLayout>
             <GridLayout orientation="horizontal" rows="*" columns="*, *" class="m-5 border" row="1" col="0">
-                <Button row="0" col="0" [text]="('fa-phone' | fonticon) + ' Call'" class="btn btn-rounded-sm btn-outline no-border fa "></Button>
+                <Button row="0" col="0" [text]="('fa-phone' | fonticon) + ' Call'" class="btn btn-rounded-sm btn-outline no-border fa " (tap)="callRestaurant()"></Button>
                 <Button row="0" col="1" [text]="('fa-envelope-o' | fonticon) + ' Email'" class="btn btn-rounded-sm btn-outline no-border fa"
                     (tap)="sendEmail()"></Button>
             </GridLayout>
