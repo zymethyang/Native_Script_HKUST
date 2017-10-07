@@ -5,7 +5,6 @@ import { TimePicker } from 'ui/time-picker';
 import { ListPicker } from 'ui/list-picker';
 import { Page } from 'ui/page';
 
-
 @Component({
     moduleId: module.id,
     templateUrl: './reservationmodal.component.html'

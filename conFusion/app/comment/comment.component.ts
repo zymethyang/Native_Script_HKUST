@@ -17,9 +17,8 @@ export class CommentComponent implements OnInit {
     commentForm: FormGroup;
 
     constructor(private changeDetectorRef: ChangeDetectorRef,
-        private formBuilder: FormBuilder, 
-        private page: Page,
-        private params: ModalDialogParams) {
+        private formBuilder: FormBuilder, private page: Page,
+        private params: ModalDialogParams,) {
 
         this.commentForm = this.formBuilder.group({
             name: ['', Validators.required],
@@ -52,5 +51,6 @@ export class CommentComponent implements OnInit {
         let currentdate: Date = new Date();
         this.commentForm.value.date= currentdate;
         this.params.closeCallback(this.commentForm.value);
+        console.log(JSON.stringify(this.commentForm.value));
     }
 }
