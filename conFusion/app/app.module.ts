@@ -7,6 +7,8 @@ import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 import { NativeScriptUIListViewModule } from "nativescript-telerik-ui/listview/angular";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
+import { PlatformService } from './services/platform.service';
+import { Image } from 'ui/image';
 
 import { AppComponent } from "./app.component";
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -18,14 +20,15 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationModalComponent } from "./reservationmodal/reservationmodal.component";
 import { CommentComponent } from "./comment/comment.component";
-
+import { UserAuthComponent } from "./userauth/userauth.component"; 
 import { MenuComponent } from './menu/menu.component';
+
 import { DishService } from './services/dish.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 import { FavoriteService } from './services/favorite.service';
-
+import { CouchbaseService } from './services/couchbase.service';
 
 import { baseURL } from './shared/baseurl';
 
@@ -64,7 +67,8 @@ import { baseURL } from './shared/baseurl';
         FavoritesComponent,
         ReservationComponent,
         ReservationModalComponent,
-        CommentComponent
+        CommentComponent,
+        UserAuthComponent 
     ],
 
     providers: [
@@ -73,7 +77,10 @@ import { baseURL } from './shared/baseurl';
         ProcessHTTPMsgService,
         PromotionService,
         LeaderService,
-        FavoriteService
+        FavoriteService,
+        CouchbaseService,
+        PlatformService,
+        Image
     ],
     schemas: [
         NO_ERRORS_SCHEMA

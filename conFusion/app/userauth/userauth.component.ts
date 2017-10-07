@@ -21,7 +21,6 @@ export class UserAuthComponent implements OnInit {
         private routerExtensions: RouterExtensions,
         private formBuilder: FormBuilder,
         private image: Image) {
-
         this.loginForm = this.formBuilder.group({
             userName: [getString('userName', ''), Validators.required],
             password: [getString('password', ''), Validators.required]
@@ -35,11 +34,11 @@ export class UserAuthComponent implements OnInit {
             telnum: ['', Validators.required],
             email: ['', Validators.required]
         });
-        
+
     }
 
     ngOnInit() {
-        this.image = <Image>this.page.getViewById<Image>('myPicture');
+
     }
 
     takePicture() {
@@ -66,15 +65,17 @@ export class UserAuthComponent implements OnInit {
             .then(function () {
                 return context.present();
             })
-            .then(function (selection) {
+            .then(selection => {
                 console.log("Selection done:");
-                selection.forEach(function (selected) {
+                selection.forEach(selected => {
                     console.log(" - " + selected.uri);
-                    this.image.src = selected.uri;
+                    let image = <Image>this.page.getViewById<Image>('myPicture');
+                    image.src = selected;
                 });
             }).catch(function (e) {
                 console.log(e);
             });
+
     }
 
     register() {

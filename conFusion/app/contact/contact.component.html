@@ -1,4 +1,5 @@
 <ActionBar title="Contact Us" class="action-bar">
+    <NavigationButton text="Menu" icon="res://ic_drawer" (tap)="openDrawer()"></NavigationButton>
 </ActionBar>
 <RadSideDrawer #drawerComponent tkToggleNavButton showOverNavigation="true">
     <ScrollView tkDrawerContent class="sidedrawer-left">
@@ -7,20 +8,28 @@
         </StackLayout>
     </ScrollView>
     <ScrollView orientation="vertical" tkMainContent class="page">
-        <GridLayout class="m-5" rows="auto">
-            <StackLayout row="0" class="border">
-                <StackLayout>
-                    <Label class="h2" text="Contact Information"></Label>
+        <GridLayout rows="* *" cols="*">
+            <GridLayout class="m-5" rows="auto" row="0" col="0">
+                <StackLayout row="0" class="border">
+                    <StackLayout>
+                        <Label class="h2" text="Contact Information"></Label>
+                    </StackLayout>
+                    <StackLayout class="p-20">
+                        <Label class="body" text="121, Clear Water Bay Road" textWrap="true"></Label>
+                        <Label class="body" text="Clear Water Bay, Kowloon" textWrap="true"></Label>
+                        <Label class="body" text="HONG KONG" textWrap="true"></Label>
+                        <Label class="body" text="Tel: +852 1234 5678" textWrap="true"></Label>
+                        <Label class="body" text="Fax: +852 8765 4321" textWrap="true"></Label>
+                        <Label class="body" text="Email:confusion@food.net" textWrap="true"></Label>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout class="p-20">
-                    <Label class="body" text="121, Clear Water Bay Road" textWrap="true"></Label>
-                    <Label class="body" text="Clear Water Bay, Kowloon" textWrap="true"></Label>
-                    <Label class="body" text="HONG KONG" textWrap="true"></Label>
-                    <Label class="body" text="Tel: +852 1234 5678" textWrap="true"></Label>
-                    <Label class="body" text="Fax: +852 8765 4321" textWrap="true"></Label>
-                    <Label class="body" text="Email:confusion@food.net" textWrap="true"></Label>
-                </StackLayout>
-            </StackLayout>
+            </GridLayout>
+            <GridLayout orientation="horizontal" rows="*" columns="*, *" class="m-5 border" row="1" col="0">
+                <Button row="0" col="0" [text]="('fa-phone' | fonticon) + ' Call'" class="btn btn-rounded-sm btn-outline no-border fa " (tap)="callRestaurant()"></Button>
+                <Button row="0" col="1" [text]="('fa-envelope-o' | fonticon) + ' Email'" class="btn btn-rounded-sm btn-outline no-border fa"
+                    (tap)="sendEmail()"></Button>
+            </GridLayout>
         </GridLayout>
+
     </ScrollView>
 </RadSideDrawer>
