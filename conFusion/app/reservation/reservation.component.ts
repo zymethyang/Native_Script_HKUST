@@ -35,7 +35,6 @@ export class ReservationComponent extends DrawerPage implements OnInit {
             smoking: false,
             dateTime: ['', Validators.required]
         });
-        this.doc = this.couchbaseService.getDocument(this.docId);
     }
     createModalView(args) {
 
@@ -91,9 +90,17 @@ export class ReservationComponent extends DrawerPage implements OnInit {
     }
 
     onSubmit() {
-        console.log(JSON.stringify(this.reservation.value));
+        let reservationArr : Array<object> = [];
 
-       
+        this.doc = this.couchbaseService.getDocument(this.docId);
+        console.log(JSON.stringify(this.doc));
+
+        if(this.doc){
+            reservationArr.push(this.doc);
+        }
+        
+       reservationArr.push(this.reservation.value);
+
         this.formReservation.animate({
             opacity: 0,
             scale: { x: 0.5, y: 0.5 },
@@ -106,10 +113,11 @@ export class ReservationComponent extends DrawerPage implements OnInit {
 
         if (this.doc == null) {
             console.log("This is the first reservation");
-            this.couchbaseService.createDocument({ "guests": this.reservation.value.guests, "smoking": this.reservation.value.smoking, "dateTime": this.reservation.value.dateTime }, this.docId);
+            this.couchbaseService.createDocument({reservationArr}, this.docId);
+            console.log(JSON.stringify(reservationArr));
         } else {
-            console.log(this.doc.value);
-            this.couchbaseService.updateDocument(this.docId, { "guests": this.reservation.value.guests, "smoking": this.reservation.value.smoking, "dateTime": this.reservation.value.dateTime });
+            this.couchbaseService.updateDocument(this.docId, { reservationArr });
+            console.log(JSON.stringify(reservationArr));
         }
     }
 }
